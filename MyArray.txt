@@ -1,12 +1,9 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <vector>
-#include <algorithm>
-#include <iterator>
 using namespace std;
 
-class   MyArray {
+class MyArray {
     private:
         int n, *ms;
     public:
@@ -23,7 +20,7 @@ class   MyArray {
                 ms = new int[k];
                 n = k;
             }
-            for (int i = 0; i < n; i++) ms[i] = random()%100-50;
+            for (int i = 0; i < n; i++) ms[i] = 0;
         }
 
         void print() 
@@ -42,90 +39,51 @@ class   MyArray {
             ms = newMs;
         }
         
-        void min()
+        void minElem()
         {
-            int min = ms[0];
-            for (int i = 0; i < n; i++)
+            int min=ms[0];
+            for(int i = 0; i < 20; i++)
             {
-                if (ms[i]<min) min = ms[i];
+                if(ms[i] < min)
+                {
+                    min = ms[i];
+                }
             }
-            cout << min << endl;
         }
         
-        void max()
+        void maxElem()
         {
-            int max = ms[0];
-            for (int i = 0; i < n; i++)
+          int max=ms[0];
+          for(int i = 0; i < 20; i++)
             {
-                if (ms[i]>max) max = ms[i];
+                if(ms[i] > max)
+                {
+                    max = ms[i];
+                }
             }
-            cout << max << endl;
         }
-        
-        int get(int k){
-            return ms[k];
-        }
-        
-        void random(int left, int right){
-            srand(time(0));
-            for (int i=0;i<n;i++) ms[i]=rand()%(right-left)+left;
-        }
-        
-        int insertElm(int r){
-            int i, t;
-            int *tmp = new int[n+1];
-            
-            for(i=0; i<n;i++) tmp[i] = ms[i];
-            tmp[n] = r;
-            n++;
-            delete ms;
-            ms = tmp;
-        }
-        
 
         ~MyArray() 
         {
-		    delete[] ms;
+            // cout << "destructor";
         }
 };
 
+
+
 int main()
 {
-    srand(time(NULL));
-    MyArray *a,*b,*c;
-    int k;
-    a= new MyArray;
-    b= new MyArray;
-    c= new MyArray;
-    
-    cin >> k;
-    a->init(k);
-    b->init(0);
-    c->init(0);
-    a->random(-20,20);
-    
-    for(int i=0; i<a->lenght();i++){
-        if (a->get(i)>0) b->insertElm(a->get(i));
-        if (a->get(i)<0) c->insertElm(a->get(i));
-    }
-    a->print();
-    b->print();
-    c->print();
-    delete a;
-    delete b;
-    delete c;
+
+    MyArray m;
+    m.init(20);
+    m.print();
+
+
+
+    MyArray* A = new MyArray;
+    A->init(10);
+    A->print();
+    delete A;
+
     return 0;
-    // m.init(20);
-    // m.print();
-    // m.min();
-    // m.max();
-    // m.removeElem(10);
-    // m.print();
-
-    // MyArray* A = new MyArray;
-    // A->init(10);
-    // A->print();
-    // delete A;
-
-    // return 0;
 }
